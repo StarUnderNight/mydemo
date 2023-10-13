@@ -1,5 +1,14 @@
 import { createApp } from 'vue'
-import './style.css'
+import router from './router'
 import App from './App.vue'
+import axios from "axios";
 
-createApp(App).mount('#app')
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
+axios.defaults.baseURL = "http://localhost:8080"
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
