@@ -3,7 +3,7 @@ import {unauthorized} from "@/net";
 
 const routes = [
     {
-        path: "/",
+        path: "/welcome",
         name: 'welcome',
         component: () => import('@/views/WelcomeView.vue'),
         children: [
@@ -18,10 +18,26 @@ const routes = [
             }
         ]
     }, {
-        path: "/home",
+        path: "/",
         name: "home",
-        component: () => import("@/views/Home.vue")
-    }
+        component: () => import("@/components/layout/AppLayout.vue"),
+        children: [
+            {
+                path: "",
+                component: () => import("@/views/Home.vue")
+            },
+            {
+                path: "/dev-list",
+                name: "devList",
+                component: () => import("@/views/device/DeviceIndex.vue")
+            },
+            {
+                path: "/:xxx(.*)*",
+                name: "error",
+                component: () => import("@/views/ErrorPage.vue")
+            }
+        ]
+    },
 ]
 
 
@@ -33,16 +49,16 @@ const router :Router = createRouter({
 /**
  * 路由守卫，防止在没有登录情况下访问不应该访问的地址
  */
-router.beforeEach((to, from, next) => {
-    const isUnauthorized = unauthorized()
-    if (to.name.toString().startsWith("welcome-") && !isUnauthorized) {
-        next("/home")
-    } else if (to.fullPath.startsWith("/home") && isUnauthorized){
-        next("/")
-    } else {
-        next() // 正常情况
-    }
-
-})
+// router.beforeEach((to, from, next) => {
+//     const isUnauthorized = unauthorized()
+//     if (to.name.toString().startsWith("welcome-") && !isUnauthorized) {
+//         next("/home")
+//     } else if (to.fullPath.startsWith("/home") && isUnauthorized){
+//         next("/")
+//     } else {
+//         next() // 正常情况
+//     }
+//
+// })
 
 export  default router
