@@ -3,11 +3,10 @@
     header
   </div>
   <div>
-    <el-table :data="devData" height="300" stripe style="width: 100%">
-      <el-table-column type="selection" width="55" />
+    <el-table :data="devData()" height="300" stripe style="width: 100%">
       <el-table-column label="序号" prop="serialCode"></el-table-column>
       <el-table-column label="ID" prop="devId"></el-table-column>
-      <el-table-column label="设备名" prop="devName"></el-table-column>
+      <el-table-column label="名称" prop="devName"></el-table-column>
       <el-table-column label="类型" prop="devType"></el-table-column>
       <el-table-column label="位置" prop="location"></el-table-column>
       <el-table-column label="上次离线时间" prop="devUpdateTime"></el-table-column>
@@ -19,38 +18,63 @@
       </el-table-column>
     </el-table>
   </div>
-  <div>
-      <el-pagination background layout="prev, pager, next" :total="1000" />
+  <div class="paginationClass">
+      <el-pagination
+        :background="false"
+        :disabled="false"
+        layout="sizes, prev, pager, next"
+        :total="tableState.total"
+        :page-size="tableState.limit"
+        :page-sizes="[5, 10, 20, 50]"
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+      />
   </div>
 
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue"
+import {defineComponent,reactive, ref, toRefs} from "vue"
 import "@/assets/iconfont/iconfont.css"
 
-const devData = ref([
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-  {serialCode: "1", devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"},
-])
+
+/**
+ * mock数据
+ */
+const dataMockNum = 100;
+const mockData = reactive([])
+for (let i = 1; i < dataMockNum; i++) {
+  mockData.push({serialCode: i, devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"})
+}
+
+
+const tableState = reactive({
+  page: 1,
+  limit: 5,
+  total: mockData.length,
+})
+
+const devData = () => {
+  return mockData.filter((item, index) => index < tableState.page * tableState.limit && index >= tableState.limit * (tableState.page - 1))
+}
+
+const handleCurrentChange = (e) => {
+  tableState.page = e
+}
+const handleSizeChange = (e) => {
+  tableState.limit = e;
+}
+
 
 
 </script>
 
 <style lang="scss" scoped>
-
+.paginationClass {
+  position: fixed;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  text-align: center;
+}
 </style>

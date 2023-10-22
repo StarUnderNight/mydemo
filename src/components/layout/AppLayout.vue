@@ -25,7 +25,7 @@ import AppHeader from "./AppHeader.vue"
   height: 100vh;
 }
 .el-main {
-  background-color: #f4f4f5;
+  background-color: #ffffff;
   padding-right: 0; /**去除el-main默认的padding**/
 }
 

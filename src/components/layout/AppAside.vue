@@ -3,45 +3,45 @@
     <el-scrollbar>
       <el-menu router unique-opened :collapse="isCollapse">
         <a href="/" class="logo">
-          <img src="@/assets/vue.svg" alt=""/>
-          <h1>监控</h1>
+          <img src="@/assets/mky/logo.png" alt=""/>
+          <h1>中煤科工</h1>
         </a>
         <el-sub-menu index="1">
           <template #title>
-            <el-icon><Setting/></el-icon> <span>首页</span>
+            <el-icon><HomeFilled/></el-icon> <span>首页</span>
           </template>
           <el-menu-item index="/a1">
-            <el-icon><Setting/></el-icon> <span>子菜单1</span>
+            <span>子菜单1</span>
           </el-menu-item>
           <el-menu-item index="/a2">
-            <el-icon><Setting/></el-icon> <span>子菜单2</span>
+            <span>子菜单2</span>
           </el-menu-item>
         </el-sub-menu>
 
         <el-sub-menu index="2">
           <template #title>
-            <el-icon><Setting/></el-icon> <span>数据显示</span>
+            <el-icon><DataLine/></el-icon> <span>数据</span>
           </template>
-          <el-menu-item index="/b1">
-            <el-icon><Setting/></el-icon> <span>总览</span>
+          <el-menu-item index="/2">
+            <span>数据总览</span>
           </el-menu-item>
           <el-menu-item index="/dev-list">
-            <el-icon><Setting/></el-icon> <span>设备列表</span>
+            <span>Robot 列表</span>
           </el-menu-item>
-          <el-menu-item index="/b2">
-            <el-icon><Setting/></el-icon> <span>详情展示</span>
+          <el-menu-item index="/data-stream-display">
+            <span>数据流量</span>
           </el-menu-item>
         </el-sub-menu>
 
         <el-sub-menu index="3">
           <template #title>
-            <el-icon><Setting/></el-icon> <span>监测</span>
+            <el-icon><i class="iconfont icon-guzhangjiluchaxun"/> </el-icon> <span>监测</span>
           </template>
-          <el-menu-item index="/c1">
-            <el-icon><Setting/></el-icon> <span>子菜单1</span>
+          <el-menu-item index="/exception-display">
+            <span>异常历史</span>
           </el-menu-item>
           <el-menu-item index="/c2">
-            <el-icon><Setting/></el-icon> <span>子菜单2</span>
+            <span>统计分析</span>
           </el-menu-item>
         </el-sub-menu>
 
@@ -50,10 +50,13 @@
             <el-icon><Setting/></el-icon> <span>系统管理</span>
           </template>
           <el-menu-item index="/d1">
-            <el-icon><Setting/></el-icon> <span>子菜单1</span>
+            <span>用户设置</span>
           </el-menu-item>
           <el-menu-item index="/d2">
-            <el-icon><Setting/></el-icon> <span>子菜单2</span>
+            <span>角色设置</span>
+          </el-menu-item>
+          <el-menu-item index="/d2">
+            <span>权限设置</span>
           </el-menu-item>
         </el-sub-menu>
 
@@ -63,8 +66,9 @@
 </template>
 
 <script setup lang="ts">
-import {Setting} from "@element-plus/icons-vue";
+import {Setting, HomeFilled, DataLine} from "@element-plus/icons-vue";
 import {ref} from "vue"
+import "@/assets/iconfont/iconfont.css"
 import {isCollapse} from "./isCollapse" // 左侧拖动菜单栏时，是否折叠菜单栏
 </script>
 
@@ -95,8 +99,8 @@ import {isCollapse} from "./isCollapse" // 左侧拖动菜单栏时，是否折�
   text-decoration: none;
   color: black;
   img {
-    width: 32px;
-    height: 32px;
+    width: 80px;
+    height: 50px;
 
   }
 }

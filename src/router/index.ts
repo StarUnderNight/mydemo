@@ -2,48 +2,58 @@ import {createRouter, createWebHistory, Router} from "vue-router";
 import {unauthorized} from "@/net";
 
 const routes = [
-    {
-        path: "/welcome",
-        name: 'welcome',
-        component: () => import('@/views/WelcomeView.vue'),
-        children: [
-            {
-                path: '',
-                name: 'welcome-login',
-                component: () => import('@/views/welcome/LoginPage.vue')
-            }, {
-                path: "/register",
-                name: "register",
-                component: () => import("@/views/welcome/RegisterPage.vue")
-            }
-        ]
-    }, {
-        path: "/",
-        name: "home",
-        component: () => import("@/components/layout/AppLayout.vue"),
-        children: [
-            {
-                path: "",
-                component: () => import("@/views/Home.vue")
-            },
-            {
-                path: "/dev-list",
-                name: "devList",
-                component: () => import("@/views/device/DeviceIndex.vue")
-            },
-            {
-                path: "/:xxx(.*)*",
-                name: "error",
-                component: () => import("@/views/ErrorPage.vue")
-            }
-        ]
-    },
+  {
+    path: "/welcome",
+    name: 'welcome',
+    component: () => import('@/views/WelcomeView.vue'),
+    children: [
+      {
+        path: '',
+        name: 'welcome-login',
+        component: () => import('@/views/welcome/LoginPage.vue')
+      }, {
+        path: "/register",
+        name: "register",
+        component: () => import("@/views/welcome/RegisterPage.vue")
+      }
+    ]
+  }, {
+    path: "/",
+    name: "home",
+    component: () => import("@/components/layout/AppLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/Home.vue")
+      },
+      {
+        path: "/dev-list",
+        name: "devList",
+        component: () => import("@/views/device/DeviceIndex.vue")
+      },
+      {
+        path: "/data-stream-display",
+        name: "dataStreamDisplay,",
+        component: () => import("@/views/data/DataStreamDisplay.vue")
+      },
+      {
+        path: "/exception-display",
+        name: "exceptionDisplay,",
+        component: () => import("@/views/monitor/ExceptionDisplay.vue")
+      },
+      {
+        path: "/:xxx(.*)*",
+        name: "error",
+        component: () => import("@/views/ErrorPage.vue")
+      }
+    ]
+  },
 ]
 
 
-const router :Router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes,
+const router: Router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
 })
 
 /**
@@ -61,4 +71,4 @@ const router :Router = createRouter({
 //
 // })
 
-export  default router
+export default router

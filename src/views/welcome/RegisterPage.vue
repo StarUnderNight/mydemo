@@ -34,6 +34,13 @@
             </template>
           </el-input>
         </el-form-item>
+        <el-form-item prop="department">
+          <el-input v-model="form.email" type="email" placeholder="部门">
+            <template #prefix>
+              <el-icon><i class="iconfont icon-bumen-moren"/></el-icon>
+            </template>
+          </el-input>
+        </el-form-item>
         <el-form-item prop="code">
           <el-row :gutter="10" style="width: 100%">
             <el-col :span="17">
@@ -58,7 +65,7 @@
     </div>
     <div style="margin-top: 20px">
       <span style="font-size: 14px;line-height: 15px;color: grey">已有账号？</span>
-      <el-link @click="router.push('/')">立即登录</el-link>
+      <el-link @click="router.push('/welcome')">立即登录</el-link>
     </div>
   </div>
 </template>
@@ -69,6 +76,8 @@ import {User, Lock, Message, EditPen} from "@element-plus/icons-vue";
 import router from "@/router/index.ts"
 import {get, post } from "@/net/index.ts"
 import {ElMessage} from "element-plus";
+import "@/assets/iconfont/iconfont.css"
+
 
 const codeBtnColdTime = ref(0)
 const formRef = ref()

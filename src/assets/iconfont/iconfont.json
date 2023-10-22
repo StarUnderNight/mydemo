@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11799125",
+      "name": "故障记录查询",
+      "font_class": "guzhangjiluchaxun",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "7269304",
+      "name": "部门-默认",
+      "font_class": "bumen-moren",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "6903296",
       "name": "离线",
       "font_class": "lixian",
