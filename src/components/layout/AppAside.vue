@@ -10,11 +10,8 @@
           <template #title>
             <el-icon><HomeFilled/></el-icon> <span>首页</span>
           </template>
-          <el-menu-item index="/a1">
-            <span>子菜单1</span>
-          </el-menu-item>
-          <el-menu-item index="/a2">
-            <span>子菜单2</span>
+          <el-menu-item index="/big-display">
+            <span>大屏展示</span>
           </el-menu-item>
         </el-sub-menu>
 
@@ -25,7 +22,7 @@
           <el-menu-item index="/2">
             <span>数据总览</span>
           </el-menu-item>
-          <el-menu-item index="/dev-list">
+          <el-menu-item index="/robot-list">
             <span>Robot 列表</span>
           </el-menu-item>
           <el-menu-item index="/data-stream-display">
@@ -40,8 +37,8 @@
           <el-menu-item index="/exception-display">
             <span>异常历史</span>
           </el-menu-item>
-          <el-menu-item index="/c2">
-            <span>统计分析</span>
+          <el-menu-item index="/monitor-flow">
+            <span>流量监测</span>
           </el-menu-item>
         </el-sub-menu>
 

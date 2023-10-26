@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory, Router} from "vue-router";
+import type {App} from "vue"
 import {unauthorized} from "@/net";
 
 const routes = [
@@ -9,42 +10,61 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'welcome-login',
-        component: () => import('@/views/welcome/LoginPage.vue')
+        name: 'user-login',
+        component: () => import('@/views/user/LoginPage.vue')
       }, {
         path: "/register",
         name: "register",
-        component: () => import("@/views/welcome/RegisterPage.vue")
+        component: () => import("@/views/user/RegisterPage.vue")
       }
     ]
-  }, {
+  },
+  {
+    path: "/big-display",
+    name: "bigDisplay",
+    component: () => import("@/views/data/big-display/index.vue")
+  },
+  {
     path: "/",
-    name: "home",
+    name: "",
     component: () => import("@/components/layout/AppLayout.vue"),
+    meta: {requiresAuth: true, title: "首页"},
     children: [
       {
         path: "",
-        component: () => import("@/views/Home.vue")
+        name: "home",
+        component: () => import("@/views/Home.vue"),
+        meta: {title: "默认页"}
       },
       {
-        path: "/dev-list",
-        name: "devList",
-        component: () => import("@/views/device/DeviceIndex.vue")
+        path: "/robot-list",
+        name: "robotList",
+        meta: {title: "Robot列表"},
+        component: () => import("@/views/data/robot/index.vue")
       },
       {
         path: "/data-stream-display",
-        name: "dataStreamDisplay,",
-        component: () => import("@/views/data/DataStreamDisplay.vue")
+        name: "dataStreamDisplay",
+        meta: {title: "数据流量"},
+        component: () => import("@/views/data/data-stream/index.vue")
       },
       {
         path: "/exception-display",
         name: "exceptionDisplay,",
-        component: () => import("@/views/monitor/ExceptionDisplay.vue")
+        meta: {title: "异常历史"},
+        component: () => import("@/views/monitor/exception-display/index.vue")
+      },
+      {
+        path: "/monitor-flow",
+        name: "monitorFlow",
+        meta: {title: "流量监测"},
+        component: () => import("@/views/monitor/flow/index.vue")
       },
       {
         path: "/:xxx(.*)*",
         name: "error",
-        component: () => import("@/views/ErrorPage.vue")
+        component: () => import("@/views/ErrorPage.vue"),
+        meta: {title: "错误页面"}
       }
     ]
   },
@@ -61,7 +81,7 @@ const router: Router = createRouter({
  */
 // router.beforeEach((to, from, next) => {
 //     const isUnauthorized = unauthorized()
-//     if (to.name.toString().startsWith("welcome-") && !isUnauthorized) {
+//     if (to.name.toString().startsWith("user-") && !isUnauthorized) {
 //         next("/home")
 //     } else if (to.fullPath.startsWith("/home") && isUnauthorized){
 //         next("/")
@@ -70,5 +90,8 @@ const router: Router = createRouter({
 //     }
 //
 // })
+export const setupRouter = (app: App<Element>) => {
+  app.use(router)
+}
 
 export default router
