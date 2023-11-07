@@ -1,6 +1,7 @@
 import Mock from "mockjs"
 import {MockParams} from "@/mock/types";
 import api from "@/mock/api";
+import {innerMockDataInit} from "@/mock/data.ts";
 
 // 需要遍历的请求
 const mocks = [...api]
@@ -11,8 +12,13 @@ Mock.setup({
 })
 
 export function mockRequest() {
-  let i: MockParams
-  for (i of mocks) {
-    Mock.mock(new RegExp(i.url), i.type || "get", i.response)
+  let param: MockParams
+  for (param of mocks) {
+    Mock.mock(new RegExp(param.url), param.type || "get", param.response)
   }
+}
+
+
+export function mockDataInit() {
+  innerMockDataInit()
 }

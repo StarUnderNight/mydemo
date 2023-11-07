@@ -105,7 +105,7 @@ async function openSocket() {
         curTime: dayjs().format("MM-DD HH:mm:ss")
       })
       await setScrollToBottom()
-      //发现消息进入    开始处理前端触发逻辑
+      //发现消息进入 开始处理前端触发逻辑
     };
     //关闭事件
     socket.onclose = function() {

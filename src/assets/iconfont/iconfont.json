@@ -1,10 +1,17 @@
 {
   "id": "4285702",
-  "name": "图标",
+  "name": "移动平台监测预警系统",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "34202262",
+      "name": "外部链接",
+      "font_class": "waibulianjie",
+      "unicode": "e85f",
+      "unicode_decimal": 59487
+    },
     {
       "icon_id": "11799125",
       "name": "故障记录查询",

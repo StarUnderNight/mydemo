@@ -1,20 +1,16 @@
 
 
-interface DataItem {
-  name: string
-  data: [string, number]
-}
-interface A {
-  id: string
-  data: DataItem[]
-}
 
 
 function test1() {
-  let date: Date = new Date(1997,9,3,1,1,1)
-
+  let arr = new Array(10)
+  for (let i = 0;i < 10;i++) {
+    arr[i] = i;
+  }
+  const barr = arr.slice(5, 8);
+  console.log(arr, barr)
 }
 
 export function test() {
-  test1()
+  // test1()
 }

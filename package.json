@@ -16,6 +16,7 @@
     "axios": "^1.5.1",
     "echarts": "^5.4.3",
     "element-plus": "^2.3.14",
+    "fs": "0.0.1-security",
     "highcharts": "^11.1.0",
     "less": "^4.2.0",
     "lodash": "^4.17.21",

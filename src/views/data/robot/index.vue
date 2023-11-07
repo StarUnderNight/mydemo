@@ -3,7 +3,7 @@
     header
   </div>
   <div>
-    <el-table :data="devData()" height="300" stripe style="width: 100%">
+    <el-table :data="devData()" height="500" stripe style="width: 100%">
       <el-table-column label="序号" prop="serialCode"></el-table-column>
       <el-table-column label="ID" prop="devId"></el-table-column>
       <el-table-column label="名称" prop="devName"></el-table-column>
@@ -43,14 +43,16 @@ import "@/assets/iconfont/iconfont.css"
  */
 const dataMockNum = 100;
 const mockData = reactive([])
+
 for (let i = 1; i < dataMockNum; i++) {
-  mockData.push({serialCode: i, devName: "dev", devType: "xxx", location:"重庆", devId: "hello", devState: "1", devUpdateTime: "2023.03.23"})
+  mockData.push({serialCode: i, devName: "robot1", devType: "digging", location:"重庆", devId: "17556323234", devState: "1", devUpdateTime: "2023.03.23"})
 }
+
 
 
 const tableState = reactive({
   page: 1,
-  limit: 5,
+  limit: 10,
   total: mockData.length,
 })
 

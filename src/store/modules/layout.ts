@@ -4,8 +4,8 @@ import { pinia } from '@/store'
 import { map, filter, size, sortBy } from 'lodash'
 import { Message } from '@arco-design/web-vue'
 import { useLocalStorageState } from '@/hooks'
-import MonitorOilLevel from "@/views/data/big-display/widgets/monitor-oil-level/index.vue";
-import MonitorPollutionDegree from "@/views/data/big-display/widgets/monitor-pollution-degree/index.vue";
+import MonitorOilLevel from "@/views/big-screen/widgets/oil-level/index.vue";
+import MonitorPollutionDegree from "@/views/big-screen/widgets/pollution-degree/index.vue";
 
 
 export type ModuleNameType =
@@ -26,9 +26,9 @@ export type ModuleType = Record<
   }
 >
 
-export const useLayoutStore = defineStore('app-layout', () => {
+export const useLayoutStore = defineStore('app-BaseLayout', () => {
   /** @description: 所有的模块 */
-  const layoutModules = useLocalStorageState<ModuleType>('layout-modules', {
+  const layoutModules = useLocalStorageState<ModuleType>('BaseLayout-modules', {
     defaultValue: {
       MonitorFlow: {
         key: 'MonitorFlow',
@@ -68,16 +68,19 @@ export const useLayoutStore = defineStore('app-layout', () => {
       },
     },
   })
+
   /** @description: 所有模块中可见的模块并按照更新时间排序, 返回的是模块的名称 */
   const validModules = computed(() => {
     const list = sortBy(filter(layoutModules.value, 'visible'), 'updateTime')
     return map(list, 'key')
   })
+
   /** @description: 将有效模块分块便于左右显示 */
   const chunkModules = computed(() => ({
     left: validModules.value.slice(0, 3),
     right: validModules.value.slice(3, 6),
   }))
+
   /** @description: 根据模块名称切换模块的可见性 */
   const onToggleByModuleName = (moduleName: ModuleNameType) => {
     const module = layoutModules.value[moduleName]

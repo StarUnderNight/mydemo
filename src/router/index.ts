@@ -20,14 +20,14 @@ const routes = [
     ]
   },
   {
-    path: "/big-display",
-    name: "bigDisplay",
-    component: () => import("@/views/data/big-display/index.vue")
+    path: "/big-screen",
+    name: "bigScreen",
+    component: () => import("@/views/big-screen/index.vue")
   },
   {
     path: "/",
     name: "",
-    component: () => import("@/components/layout/AppLayout.vue"),
+    component: () => import("@/components/BaseLayout/AppLayout.vue"),
     meta: {requiresAuth: true, title: "首页"},
     children: [
       {
@@ -55,7 +55,7 @@ const routes = [
         component: () => import("@/views/monitor/exception-display/index.vue")
       },
       {
-        path: "/monitor-flow",
+        path: "/flow",
         name: "monitorFlow",
         meta: {title: "流量监测"},
         component: () => import("@/views/monitor/flow/index.vue")

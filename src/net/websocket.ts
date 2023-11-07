@@ -1,4 +1,4 @@
-export default class SocketService {
+class SocketService {
   static instance = null;
   static get Instance() {
     if (!this.instance) {
@@ -6,24 +6,18 @@ export default class SocketService {
     }
     return this.instance;
   }
-  // 和服务端连接的socket对象
   ws = null;
-  // 存储回调函数
-  callBackMapping = {};
-  // 标识是否连接成功
-  connected = false;
-  // 记录重试的次数
-  sendRetryCount = 0;
-  // 重新连接尝试的次数
-  connectRetryCount = 0;
+  callBackMapping = {};  // 存储回调函数
+  connected = false;  // 标识是否连接成功
+  sendRetryCount = 0;  // 记录重试的次数
+  connectRetryCount = 0;  // 重新连接尝试的次数
+
   //  定义连接服务器的方法
   connect() {
-    // 连接服务器
+
     if (typeof(WebSocket) == "undefined") {
       return console.log('您的浏览器不支持WebSocket');
     }
-    // let token = $.cookie('123');
-    // let token = '4E6EF539AAF119D82AC4C2BC84FBA21F';
     let url = 'ws://localhost:3001';
     this.ws = new WebSocket(url, 'echo-protocol');
     // 连接成功的事件

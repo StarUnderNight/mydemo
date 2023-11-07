@@ -1,81 +1,104 @@
 <template>
-  <div id="scene-container">
-    <!-- Our <canvas> will be inserted here -->
+  <div class="base-model">
+    <div class="base-model-left">
+      <div class="map-panels">
+        <slot name="left"> </slot>
+      </div>
+      <div class="map-controls">
+        <slot name="control"> </slot>
+      </div>
+    </div>
+    <div class="base-model-right">
+      <div class="map-panels">
+        <slot name="right"></slot>
+      </div>
+    </div>
+    <div id="scene-container" class="loading">
+      <!-- Our <canvas> will be inserted here -->
+    </div>
   </div>
 </template>
 
-<script lang="ts" >
+<script lang="ts" setup>
 
-import { World } from './World.ts';
+import {onMounted} from "vue";
+import {World} from "@/components/ThreeJS/World.ts";
 
 
-export default {
-  name: "Index",
-  mounted() {
-    this.init()
-  },
-  methods: {
-    init() {
-      this.main().catch((err) => {
-        console.error(err);
-      });
-    },
-    async main() {
-      // Get a reference to the container element
-      const container = document.querySelector('#scene-container');
-      console.log(container)
 
-      // create a new world
-      const world = new World(container);
+onMounted(()=>{
+  main().catch((err)=> {
+    console.log(err)
+  })
+})
 
-      // complete async tasks
-      await world.init();
+async function main() {
+  const container = document.querySelector('#scene-container');
 
-      // start the animation loop
-      world.start();
-    }
-  }
+  let world = new World(container);
+
+  await world.init()
+  world.start()  // 启动动画循环
 }
-
 
 
 </script>
 
 <style lang="scss" scoped>
-body {
-  /* remove margins and scroll bars */
-  margin: 0;
-  overflow: hidden;
-
-  /* style text */
-  text-align: center;
-  font-size: 12px;
-  font-family: Sans-Serif;
-
-  /* color text */
-  color: #444;
-}
-
-h1 {
-  /* position the heading */
-  position: absolute;
-  width: 100%;
-
-  /* make sure that the heading is drawn on top */
-  z-index: 1;
-}
-
-#scene-container {
-  /* tell our scene container to take up the full page */
-  position: absolute;
+.base-model {
   width: 100%;
   height: 100%;
 
-  /*
-    Set the container's background color to the same as the scene's
-    background to prevent flashing on load
-  */
-  background-color: skyblue;
-}
+  .base-model-left,
+  .base-model-right {
+    position: absolute;
+    top: 70px;
+    z-index: 999;
+    display: flex;
+    grid-gap: 10px;
+    height: calc(100% - 90px);
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
+    &.base-model-left {
+      left: 10px;
+    }
+
+    &.base-model-right {
+      right: 10px;
+    }
+
+    .map-panels {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      grid-gap: 10px;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .map-controls {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: #fff;
+
+    .icon {
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+  }
+}
 </style>

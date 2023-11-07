@@ -1,3 +1,5 @@
+import {mockFlowData} from "@/mock/data.ts";
+import {MockParams} from "@/mock/types.ts";
 
 function paramObj(url) {
   const search = url.split("?")[1]
@@ -14,8 +16,6 @@ function paramObj(url) {
   )
 }
 
-
-
 const api = [
   {
     url: "/api/test2",
@@ -29,6 +29,13 @@ const api = [
           ret: "成功",
         }
       }
+    }
+  },
+  {
+    url: "/api/flow-data",
+    type: "get",
+    response: (config) => {
+      return mockFlowData(paramObj(config.url))
     }
   }
 ]

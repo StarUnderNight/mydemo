@@ -11,7 +11,7 @@ const chart = () => {
   const myChart = echarts.init(echartsContainer.value)
 
   let data: DataItem[] = [];
-  let now = new Date(1997, 9, 3);
+  let now = new Date(2019, 9, 3);
   const oneDay = 24 * 3600 * 1000;
   let value = Math.random() * 1000;
   for (let i = 0; i < 1000; i++) {

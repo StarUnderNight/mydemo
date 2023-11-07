@@ -13,8 +13,8 @@ const chart = () => {
 
   let data = [];
   let data2 = [];
-  let now = new Date(1997, 9, 3);
-  let now2 = new Date(1998, 9, 3);
+  let now = new Date(2019, 9, 3);
+  let now2 = new Date(2019, 8, 3);
   const oneDay = 24 * 3600 * 1000;
   let value = Math.random() * 1000;
   let value2 = Math.random() * 1000;
