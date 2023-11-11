@@ -28,7 +28,7 @@
 import {onMounted, ref} from "vue"
 import {get} from "@/net";
 import {ElMessage} from "element-plus";
-import BaseStackedLine from "@/components/BaseStackedline/index.vue"
+import BaseStackedLine from "@/components/BaseStackedLine/index.vue"
 
 let propsData = {
   dataset: [],

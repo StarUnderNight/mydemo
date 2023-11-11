@@ -1,22 +1,22 @@
 import axios from "axios";
 import {getFullTime} from "@/utils/time_util.ts";
 
-let flowDatabase = null;
+let lineDataBase = {}
 
-export function mockFlowData(params) {
-  const fromTime = params["fromTime"];
-  const toTime = params["toTime"];
-  console.log("fromTime:", fromTime, "toTime:", toTime)
+export function mockLineData(params, idx:string, idxFirst:string, valFirst:string) {
+  const startTime = params["startTime"];
+  const endTime = params["endTime"];
+  let tmp = lineDataBase[idx];
 
-  if (flowDatabase == null) {
+  if (lineDataBase[idx] == null) {
     return {
       code: 404,
-      message: "流量数据不存在，请联系管理员",
+      message: "[" + idx + "]数据不存在，请联系管理员",
       data: {}
     };
   }
 
-  let {leftIdx, rightIdx} = getIntervalIdx(flowDatabase[0], fromTime, toTime);
+  let {leftIdx, rightIdx} = getIntervalIdx(tmp[0], startTime, endTime);
   if (leftIdx == -1 || rightIdx == -1) {
     return {
       code: 404,
@@ -25,20 +25,17 @@ export function mockFlowData(params) {
     };
   }
 
-  // const idxArr = flowDatabase[0].slice(leftIdx, rightIdx);
   const idxArr = [];
-  const valArr = flowDatabase[1].slice(leftIdx, rightIdx);
+  const valArr = tmp[1].slice(leftIdx, rightIdx);
   for (let i = leftIdx; i <= rightIdx; i++) {
-    let dateTmp = new Date(flowDatabase[0][i] * 1000)
+    let dateTmp = new Date(tmp[0][i] * 1000)
     idxArr.push(getFullTime(dateTmp));
   }
-  idxArr.unshift("时间");
-  valArr.unshift("流量");
+  idxArr.unshift(idxFirst);
+  valArr.unshift(valFirst);
   const ret = [];
   ret.push(idxArr);
   ret.push(valArr);
-
-  console.log("返回数据：", ret);
 
   return {
     code: 200,
@@ -52,11 +49,35 @@ export function mockFlowData(params) {
 
 //初始化一些mock数据
 export function innerMockDataInit() {
-  if (flowDatabase == null) {
-    axios.get("http://localhost:5173/static/mock/flow-data.json").then(resp => {
-      flowDatabase = resp.data.data;
+
+  if (lineDataBase["flow"] == null) {
+    axios.get("http://localhost:5173/static/mock/flow.json").then(resp => {
+      lineDataBase["flow"] = resp.data.data;
     });
   }
+  if (lineDataBase["oil-level"] == null) {
+    axios.get("http://localhost:5173/static/mock/oil_level.json").then(resp => {
+      lineDataBase["oil-level"] = resp.data.data;
+    });
+  }
+  if (lineDataBase["oil-temperature"] == null) {
+    axios.get("http://localhost:5173/static/mock/oil_temperature.json").then(resp => {
+      lineDataBase["oil-temperature"] = resp.data.data;
+    });
+  }
+  if (lineDataBase["pollution-degree"] == null) {
+    axios.get("http://localhost:5173/static/mock/pollution_degree.json").then(resp => {
+      lineDataBase["pollution-degree"] = resp.data.data;
+    });
+  }
+  if (lineDataBase["pressure"] == null) {
+    axios.get("http://localhost:5173/static/mock/pressure.json").then(resp => {
+      lineDataBase["pressure"] = resp.data.data;
+    });
+  }
+
+  console.log("lineDataBase", lineDataBase);
+
 }
 
 /**

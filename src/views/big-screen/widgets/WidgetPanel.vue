@@ -8,25 +8,37 @@
     @click.stop="() => {}"
     @mouseenter.stop="() => {}"
     @mouseleave.stop="() => {}"
+    @click="$emit('showDialog', title)"
   >
+    <!--title表示给父组件传递的参数，相当于在这里调用父组件的函数 -->
 
-    <div class="widget-panel-title">{{ title }}</div>
+    <el-tooltip
+      class="box-item"
+      effect="light"
+      content="点击查看详细内容"
+      placement="top-start"
+    >
+      <div class="widget-panel-title">{{ title }}</div>
+    </el-tooltip>
+
     <div class="widget-panel-main">
-      <slot></slot>
+      <slot name="widget"></slot>
     </div>
   </div>
 
-
 </template>
+
 <script setup lang="ts">
+
 interface PropsType {
   title: string
 }
 defineProps<PropsType>()
+
 </script>
+
 <style lang="scss" scoped>
 $beam-color: #99fffe;
-
 
 .widget-panel {
   position: relative;
@@ -54,6 +66,16 @@ $beam-color: #99fffe;
     font-size: 18px;
     font-weight: bold;
     color: #fff;
+    cursor: pointer;
+  }
+
+  .detail-panel {
+    //display: none;
+    float: left;
+    margin-left:  -100px;
+    width: 500px;
+    height: 500px;
+
   }
 
   .widget-panel-main {

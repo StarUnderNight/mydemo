@@ -1,12 +1,11 @@
-import {createRouter, createWebHistory, Router} from "vue-router";
+import {createRouter, createWebHistory, Router, RouteRecordRaw} from "vue-router";
 import type {App} from "vue"
-import {unauthorized} from "@/net";
 
-const routes = [
+const routes:RouteRecordRaw[] = [
   {
     path: "/welcome",
     name: 'welcome',
-    component: () => import('@/views/WelcomeView.vue'),
+    component: () => import('@/views/user/WelcomeView.vue'),
     children: [
       {
         path: '',
@@ -25,6 +24,11 @@ const routes = [
     component: () => import("@/views/big-screen/index.vue")
   },
   {
+    path: "/test",
+    name: "Test",
+    component: () => import("@/test/index.vue")
+  },
+  {
     path: "/",
     name: "",
     component: () => import("@/components/BaseLayout/AppLayout.vue"),
@@ -39,7 +43,7 @@ const routes = [
       {
         path: "/robot-list",
         name: "robotList",
-        meta: {title: "Robot列表"},
+        meta: {title: "机器人列表"},
         component: () => import("@/views/data/robot/index.vue")
       },
       {
@@ -55,7 +59,7 @@ const routes = [
         component: () => import("@/views/monitor/exception-display/index.vue")
       },
       {
-        path: "/flow",
+        path: "/monitor-flow",
         name: "monitorFlow",
         meta: {title: "流量监测"},
         component: () => import("@/views/monitor/flow/index.vue")

@@ -1,6 +1,6 @@
 <template>
-  <div ref="container" class="base-turbine">
-    <div class="base-turbine-left">
+  <div class="base-model">
+    <div class="base-model-left">
       <div class="map-panels">
         <slot name="left"> </slot>
       </div>
@@ -8,41 +8,49 @@
         <slot name="control"> </slot>
       </div>
     </div>
-    <div class="base-turbine-right">
+    <div class="base-model-right">
       <div class="map-panels">
         <slot name="right"></slot>
       </div>
     </div>
-    <div v-if="loading" class="loading">
-      <IconLoading spin class="icon" />
-      <span>模型加载中,请耐心等待...</span>
+    <div id="scene-container" class="loading">
+      <!-- Our <canvas> will be inserted here -->
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { provide } from 'vue'
-import { IconLoading } from '@arco-design/web-vue/es/icon'
-import { useTurbine } from './hooks/useTurbine'
 
-const {
-  container,
-  loading,
-  equipmentComposeAnimation,
-  equipmentDecomposeAnimation,
-} = useTurbine()
+<script lang="ts" setup>
 
-provide('turbineActions', {
-  equipmentComposeAnimation,
-  equipmentDecomposeAnimation,
+import {onMounted} from "vue";
+import {World} from "@/components/ThreeJS/World.ts";
+
+
+
+onMounted(()=>{
+  main().catch((err)=> {
+    console.log(err)
+  })
 })
+
+async function main() {
+  const container = document.querySelector('#scene-container');
+
+  let world = new World(container);
+
+  await world.init()
+  world.start()  // 启动动画循环
+}
+
+
 </script>
+
 <style lang="scss" scoped>
-.base-turbine {
+.base-model {
   width: 100%;
   height: 100%;
 
-  .base-turbine-left,
-  .base-turbine-right {
+  .base-model-left,
+  .base-model-right {
     position: absolute;
     top: 70px;
     z-index: 999;
@@ -51,11 +59,11 @@ provide('turbineActions', {
     height: calc(100% - 90px);
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    &.base-turbine-left {
+    &.base-model-left {
       left: 10px;
     }
 
-    &.base-turbine-right {
+    &.base-model-right {
       right: 10px;
     }
 

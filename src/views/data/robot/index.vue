@@ -13,7 +13,7 @@
       <el-table-column label="状态">
         <template #default="scope">
           <i v-if="scope.row.devState==='1'" class="iconfont icon-zaixianzhuangtai" style="color: greenyellow"/>
-          <i v-else class="iconfont icon-zaixianzhuangtai" style="color: gray"></i>
+          <i v-else class="iconfont icon-zaixianzhuangtai" style="color: rgb(128,128,128)"></i>
         </template>
       </el-table-column>
     </el-table>

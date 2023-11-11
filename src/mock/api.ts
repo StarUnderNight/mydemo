@@ -1,4 +1,4 @@
-import {mockFlowData} from "@/mock/data.ts";
+import {mockLineData} from "@/mock/data.ts";
 import {MockParams} from "@/mock/types.ts";
 
 function paramObj(url) {
@@ -21,7 +21,6 @@ const api = [
     url: "/api/test2",
     type: "get",
     response: (config) => {
-      console.log(config)
       return {
         code: 200,
         message: "成功",
@@ -35,7 +34,35 @@ const api = [
     url: "/api/flow-data",
     type: "get",
     response: (config) => {
-      return mockFlowData(paramObj(config.url))
+      return mockLineData(paramObj(config.url), "flow", "时间", "流量");
+    }
+  },
+  {
+    url: "/api/oil-level-data",
+    type: "get",
+    response: (config) => {
+      return mockLineData(paramObj(config.url), "oil-level", "时间", "油位");
+    }
+  },
+  {
+    url: "/api/oil-temperature-data",
+    type: "get",
+    response: (config) => {
+      return mockLineData(paramObj(config.url), "oil-temperature", "时间", "油温");
+    }
+  },
+  {
+    url: "/api/pollution-degree-data",
+    type: "get",
+    response: (config) => {
+      return mockLineData(paramObj(config.url), "pollution-degree", "时间", "污染度");
+    }
+  },
+  {
+    url: "/api/pressure-data",
+    type: "get",
+    response: (config) => {
+      return mockLineData(paramObj(config.url), "pressure", "时间", "压力");
     }
   }
 ]
