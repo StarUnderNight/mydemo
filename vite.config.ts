@@ -2,25 +2,55 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-      vue(),
+    vue(),
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+      ],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+      ],
     }),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@/assets/styles/variable.scss" as *;
+          @use "@/assets/styles/mixins.scss" as *;
+        `,
+      },
+      less: {
+        modifyVars: {
+          'dark-primary-5': '#37a8d3', // 悬浮
+          'dark-primary-6': '#64c5e6', // 常规
+          'dark-primary-7': '#209ac9', // 点击
+          'dark-color-bg-5': '#02273a',
+          'dark-color-bg-2': '#02273a',
+          'dark-gray-2': '#042438',
+          'dark-gray-3': '#1a465c',
+          'border-radius-medium': '0px',
+          'border-radius-small': '0px',
+          'color-fill-2': '#1a3948',
+        },
+      },
+    },
+  },
 
 
 })
