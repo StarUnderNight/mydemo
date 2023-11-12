@@ -8,7 +8,7 @@
     @click.stop="() => {}"
     @mouseenter.stop="() => {}"
     @mouseleave.stop="() => {}"
-    @click="$emit('showDialog', title)"
+
   >
     <!--title表示给父组件传递的参数，相当于在这里调用父组件的函数 -->
 
@@ -18,7 +18,7 @@
       content="点击查看详细内容"
       placement="top-start"
     >
-      <div class="widget-panel-title">{{ title }}</div>
+      <div class="widget-panel-title" @click="$emit('showDialog', title)">{{ title }}</div>
     </el-tooltip>
 
     <div class="widget-panel-main">

@@ -20,7 +20,6 @@ import {PLYLoader} from "three/examples/jsm/loaders/PLYLoader";
 import {createLabelWithLine} from "@/components/ThreeJS/components/label.ts";
 import {createStats} from "@/components/ThreeJS/components/stats.ts";
 import {createAxesHelper, createGridHelper} from "@/components/ThreeJS/components/helpers.ts";
-import GUI from "three/examples/jsm/libs/lil-gui.module.min";
 
 
 let camera:PerspectiveCamera;
@@ -97,17 +96,17 @@ class World {
       scene.background = new Color((0x333333))
     });
 
-      const layers = {
-          '启停标签': function () {
-              camera.layers.toggle(1);
-          }
-      };
+      // const layers = {
+      //     '启停标签': function () {
+      //         camera.layers.toggle(1);
+      //     }
+      // };
 
-      let gui = new GUI();
-
-      gui.title('操作');
-      gui.add(layers, '启停标签');
-      gui.open();
+      // let gui = new GUI();
+      //
+      // gui.title('操作');
+      // gui.add(layers, '启停标签');
+      // gui.open();
 
   }
 

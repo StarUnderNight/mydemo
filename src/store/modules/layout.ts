@@ -24,6 +24,7 @@ export type ModuleType = Record<
     visible: boolean
     updateTime: number
     url: string
+    echartOption: object
   }
 >
 
@@ -37,6 +38,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 1,
         url: "/api/flow-data",
+        echartOption: {
+
+        }
       },
       MonitorPressure: {
         key: 'MonitorPressure',
@@ -44,6 +48,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 2,
         url: "/api/pressure-data",
+        echartOption: {
+
+        }
       },
       MonitorOilTemperature: {
         key: 'MonitorOilTemperature',
@@ -51,6 +58,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 3,
         url: "/api/oil-temperature-data",
+        echartOption: {
+
+        }
       },
       MonitorOilLevel: {
         key: 'MonitorOilLevel',
@@ -58,6 +68,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 4,
         url: "/api/oil-level-data",
+        echartOption: {
+
+        }
       },
       MonitorPollutionDegree: {
         key: 'MonitorPollutionDegree',
@@ -65,6 +78,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 5,
         url: "/api/pollution-degree-data",
+        echartOption: {
+
+        }
       },
       MonitorError: {
         key: 'MonitorError',
@@ -72,6 +88,9 @@ export const useLayoutStore = defineStore('app-BaseLayout', () => {
         visible: true,
         updateTime: 6,
         url: "/api/error-data",
+        echartOption: {
+
+        }
       },
     },
   })

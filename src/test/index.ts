@@ -1,5 +1,4 @@
-
-
+import {cos} from "three/examples/jsm/nodes/shadernode/ShaderNodeBaseElements";
 
 
 function test1() {
@@ -7,8 +6,9 @@ function test1() {
   for (let i = 0;i < 10;i++) {
     arr[i] = i;
   }
-  const barr = arr.slice(5, 8);
-  console.log(arr, barr)
+  console.log(arr);
+  const val = arr.pop();
+  console.log(val, arr)
 }
 
 export function test() {
